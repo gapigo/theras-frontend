@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "theras-technologies",
+    "slug": "theras-technologies",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
