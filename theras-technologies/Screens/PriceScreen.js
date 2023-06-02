@@ -1,39 +1,47 @@
-// import React, { useState } from 'react';
-
-// const PriceScreen = () => {
-//   return <PriceScreen>price el</PriceScreen>;
-// };
-
-// export default PriceScreen;
-
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Chart from 'chart.js/auto';
+import { CategoryScale } from 'chart.js';
+import { Data } from '../Components/price_graphic/Data';
+import PieChart from '../Components/price_graphic/PieChart';
+import BarChart from '../Components/price_graphic/BarChart';
+import LineChart from '../Components/price_graphic/LineChart';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    fontSize: 20,
-  },
-});
+Chart.register(CategoryScale);
 
-const PriceScreen = (props) => {
-  let route = props.route;
+const PriceScreen = () => {
+  const [chartData, setChartData] = useState({
+    labels: Data.map((data) => data.year),
+    datasets: [
+      {
+        label: 'Users Gained ',
+        data: Data.map((data) => data.userGain),
+        backgroundColor: [
+          'rgba(75,192,192,1)',
+          'ecf0f1',
+          '#50AF95',
+          '#f3ba2f',
+          '#2a71d0',
+        ],
+        borderColor: 'black',
+        borderWidth: 2,
+      },
+    ],
+  });
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>
-        <Text style={{ fontWeight: 'bold' }}>Screen Route: </Text>
-        {route.name}
-      </Text>
-      <Text style={styles.text}>
-        <Text style={{ fontWeight: 'bold' }}>Params: </Text>
-        {route.params ? JSON.stringify(route.params, 5) : 'No Params Passed'}
-      </Text>
+    // <View className="App">
+    //   <PieChart chartData={chartData} />
+    //   <BarChart chartData={chartData} />
+    //   <LineChart chartData={chartData} />
+    // </View>
+    <View>
+      <div style={{ maxWidth: '50%', height: '100vh' }}>
+        {/* <PieChart chartData={chartData} /> */}
+        {/* <BarChart chartData={chartData} /> */}
+        <LineChart chartData={chartData} />
+      </div>
     </View>
   );
 };
